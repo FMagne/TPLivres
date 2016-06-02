@@ -71,7 +71,14 @@
                     <H3 style="text-align:center">
                         {{"Tous les tomes à 8€"}}
                     </H3>
+                    <section ng-init="store.selTab(1)">
+                        <ul class="nav nav-pills">
+                            <li ng-class="{'active' : store.isSelect(1)}"> <a href ng_click="store.selTab(1)">Bibliothèque</a></li>
+                            <li ng-class="{'active' : store.isSelect(2)}"> <a href ng_click="store.selTab(2)">Mon Panier</a></li>
+                        </ul>
+                    </section>
                 </div>
+<<<<<<< HEAD
                 <div class ='row'>
                     <div class="carosel col-xs-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-10 col-md-6 col-lg-6" id="carosel1">
                         <a class="carosel-control carosel-control-left glyphicon glyphicon-chevron-left" href="#"></a>
@@ -82,11 +89,27 @@
                         </div>
                         <a class="carosel-control carosel-control-right glyphicon glyphicon-chevron-right" href="#"></a>
                         </div>
+=======
+            </div>
+            <div class ='row' ng-show="store.isSelect(1)">
+                <div class="carosel col-xs-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-10 col-md-6 col-lg-6" id="carosel1">
+                    <a class="carosel-control carosel-control-left glyphicon glyphicon-chevron-left" href="#"></a>
+                    <div class="carosel-inner">
+                        <span ng-repeat="product in store.products | orderBy : 'store.activeFilter'" style="cursor:pointer">
+                            <img style="width:100px" class="carosel-item" src="{{product.image}}" />
+                        </span>
+>>>>>>> TPLivres/master
                     </div>
+                    <a class="carosel-control carosel-control-right glyphicon glyphicon-chevron-right" href="#"></a>
                 </div>
+<<<<<<< HEAD
             </div>
             <div class ='row'>
                 <table class="table table-striped" style="max-width:800px;display:inline-table;">
+=======
+
+                <table ng-repeat="product in store.products | orderBy: store.activeFilter" class="table table-striped" style="max-width:800px;display:inline-table;">
+>>>>>>> TPLivres/master
                     <thead style="cursor:pointer">
                         <th style="text-align:center">Image</th>
                         <th style="text-align:center" href ng_click="store.filterOn('name')">Nom</th>
@@ -113,16 +136,45 @@
                     </tbody>
                 </table>
             </div>
+<<<<<<< HEAD
+=======
+            <div class = 'row' ng:controller="CartForm" ng-show="store.isSelect(2)">
+                <table class="table">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Qté</th>
+                        <th>Prix</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                    <tr ng:repeat="item in invoice.items">
+                        <td><input type="text" ng:model="item.description"class="input-small"></td>
+                        <td><input type="number" ng:model="item.qty" ng:required class="input-mini"></td>
+                        <td><input type="number" ng:model="item.cost" ng:required class="input-mini"></td>
+                        <td>{{item.qty * item.cost | currency}}</td>
+                        <td>
+                            [<a href ng:click="removeItem($index)">X</a>]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href ng:click="addItem()" class="btn btn-small">add item</a></td>
+                        <td></td>
+                        <td>Total:</td>
+                        <td>{{total() | currency}}</td>
+                    </tr>
+                </table>
+            </div>
+>>>>>>> TPLivres/master
         </div>
-    <script>
-        $('.carosel-control-right').click(function() {
-          $(this).blur();
-          $(this).parent().find('.carosel-item').first().insertAfter($(this).parent().find('.carosel-item').last());
-        });
-        $('.carosel-control-left').click(function() {
-          $(this).blur();
-          $(this).parent().find('.carosel-item').last().insertBefore($(this).parent().find('.carosel-item').first());
-        });
-    </script>
+        <script>
+            $('.carosel-control-right').click(function() {
+              $(this).blur();
+              $(this).parent().find('.carosel-item').first().insertAfter($(this).parent().find('.carosel-item').last());
+            });
+            $('.carosel-control-left').click(function() {
+              $(this).blur();
+              $(this).parent().find('.carosel-item').last().insertBefore($(this).parent().find('.carosel-item').first());
+            });
+        </script>
     </body>
 </html>
