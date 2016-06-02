@@ -88,7 +88,7 @@
                         </div>
                         <a class="carosel-control carosel-control-right glyphicon glyphicon-chevron-right" href="#"></a>
                     </div>
-                    <table ng-repeat="product in store.products | orderBy: store.activeFilter" class="table table-striped" style="max-width:800px;display:inline-table;">
+                    <table class="table table-striped" style="max-width:800px;display:inline-table;">
                         <thead style="cursor:pointer">
                             <th style="text-align:center">Image</th>
                             <th style="text-align:center" href ng_click="store.filterOn('name')">Nom</th>
@@ -96,7 +96,7 @@
                             <th style="text-align:center">Commentaires</th>
                         </thead>
                         <tbody ng-show = "product.selected">
-                            <tr>
+                            <tr ng-repeat="product in store.products | orderBy: store.activeFilter">
                                 <td style="vertical-align:middle"> <img src="{{images}}" style="width: 150px; height:150px"/>
                                 <td style="vertical-align:middle">{{product.name}}</td>
                                 <td style="vertical-align:middle">{{product.price | currency: '€' : 2}}</td>
