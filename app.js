@@ -33,6 +33,7 @@
               author: "tim@example.org",
               createdOn: 1397490980837
             }],
+            selected: false
         },
         {
             name: 'Tome 2 : La Pierre des Larmes',
@@ -48,7 +49,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: 'Tome 3 : Le Sang de la Déchirure',
@@ -64,7 +66,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: 'Tome 4 : Le Temple des Vents',
@@ -80,7 +83,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: "Tome 5 : L'Âme du Feu",
@@ -96,7 +100,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false;
         },
         {
             name: 'Tome 6 : La Foi des Réprouvés',
@@ -112,7 +117,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: 'Tome 7 : Les Piliers de la Création',
@@ -128,7 +134,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: "Tome 8 : L'Empire des Vaincus",
@@ -144,7 +151,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: 'Tome 9 : La Chaîne des Flammes',
@@ -160,7 +168,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: 'Tome 10 : Le Fantôme du Souvenir',
@@ -176,7 +185,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: "Tome 11 : L'Ombre d'une Inquisitrice",
@@ -192,7 +202,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: 'Tome 12 : La Machine à Présages',
@@ -208,7 +219,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: 'Tome 13 : Le Troisième Royaume',
@@ -224,7 +236,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: 'Tome 14 : Le Crépuscule des Prophéties',
@@ -240,7 +253,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         },
         {
             name: 'Tome 15 : Le Coeur de la Guerre',
@@ -256,7 +270,8 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
+            selected: false
         }
     ];
 })();
