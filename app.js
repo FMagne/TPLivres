@@ -101,7 +101,7 @@
               author: "tim@example.org",
               createdOn: 1397490980837
             }],
-            selected: false;
+            selected: false
         },
         {
             name: 'Tome 6 : La Foi des Réprouvés',
