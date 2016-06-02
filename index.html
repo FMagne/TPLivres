@@ -1,60 +1,158 @@
 <!DOCTYPE html>
-<html ng-app="gemStore">
+<html ng-app="bookStore">
     <head>
-        <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
-    </head>
-
-    <body ng-controller="StoreController as store" style="text-align:center">
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
         <script type="application/javascript" src="angular.min.js"></script>
         <script type="text/javascript" src="app.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <style>@media (max-width: 300px) {
+  .carosel-item {
+    width: 100%;
+  }
+}
+@media (min-width: 300px) {
+  .carosel-item {
+    width: 50%;
+  }
+}
+@media (min-width: 500px) {
+  .carosel-item {
+    width: 33.333%;
+  }
+}
+@media (min-width: 768px) {
+  .carosel-item {
+    width: 25%;
+  }
+}
+.carosel {
+  position: relative;
+  background-color: #000;
+}
+.carosel-inner {
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0;
+}
+.carosel-item {
+  display: inline-block;
+}
+.carosel-control {
+  position: absolute;
+  top: 50%;
+  padding: 15px;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.5);
+  transform: translateY(-50%);
+  border-radius: 50%;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 30px;
+  display: inline-block;
+}
+.carosel-control-left {
+  left: 15px;
+}
+.carosel-control-right {
+  right: 15px;
+}
+.carosel-control:active,
+.carosel-control:hover {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.8);
+}</style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div ng-controller="StoreController as store">
+                <div class ='row'>
+                    <H1 style="text-align:center">
+                        {{"Ma librairie en Ligne"}}
+                    </H1>
+                    <H3 style="text-align:center">
+                        {{"Tous les tomes à 8€"}}
+                    </H3>
+                    <section ng-init="store.selTab(1)">
+                        <ul class="nav nav-pills">
+                            <li ng-class="{'active' : store.isSelect(1)}"> <a href ng_click="store.selTab(1)">Bibliothèque</a></li>
+                            <li ng-class="{'active' : store.isSelect(2)}"> <a href ng_click="store.selTab(2)">Mon Panier</a></li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+            <div class ='row' ng-show="store.isSelect(1)">
+                <div class="carosel col-xs-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-10 col-md-6 col-lg-6" id="carosel1">
+                    <a class="carosel-control carosel-control-left glyphicon glyphicon-chevron-left" href="#"></a>
+                    <div class="carosel-inner">
+                        <span ng-repeat="product in store.products | orderBy : 'store.activeFilter'" style="cursor:pointer">
+                            <img style="width:100px" class="carosel-item" src="{{product.image}}" />
+                        </span>
+                    </div>
+                    <a class="carosel-control carosel-control-right glyphicon glyphicon-chevron-right" href="#"></a>
+                </div>
 
-        <h1>{{"Bienvenue dans ma boutique de pierres précieuses"}}</h1>
-
-        <section ng-init="store.selTab(1)" style="left:30%;">
-            <ul class="nav nav-pills">
-                <li ng-class="{'active' : store.isSelect(1)}"> <a href ng_click="store.selTab(1)">Photos</a></li>
-                <li ng-class="{'active' : store.isSelect(2)}"> <a href ng_click="store.selTab(2)">Commentaires</a></li>
-            </ul>
-        </section>
-
-        <table class="table table-striped" style="max-width:800px;display:inline-table;">
-            <thead style="cursor:pointer">
-                <th style="text-align:center" href ng_click="store.filterOn('name')">Nom</th>
-                <th style="text-align:center" href ng_click="store.filterOn('description')">Description</th>
-                <th style="text-align:center" href ng_click="store.filterOn('price')">Prix</th>
-                <th style="text-align:center" href ng_click="store.filterOn('price')"></th>
-                <th style="text-align:center">
-                    <span ng-show="store.isSelect(1)">Photos</span>
-                    <span ng-show="store.isSelect(2)">Commentaires</span>
-                </th>
-            </thead>
-            <tbody>
-                <tr ng-repeat="product in store.products | orderBy: store.activeFilter" ng-hide = "!product.enVente">
-                    <td style="vertical-align:middle">{{product.name}}</td>
-                    <td style="vertical-align:middle">{{product.description}}</td>
-                    <td style="vertical-align:middle">{{product.price | currency: '€' : 2}}</td>
-                    <td style="width:150px;vertical-align:middle">
-                        <button class="btn btn-primary btn-block" ng-show="product.enStock">Ajouter au panier</button>
-                        <button class="btn btn-warning btn-block" ng-show="!product.enStock" disabled>En Rupture</button>
-                    </td>
-                    <td style="vertical-align:middle">
-
-                        <div ng-show="store.isSelect(1)" ng-repeat="images in product.images">
-                            <span>
-                                <img src="{{images}}" style="width: 20px; height:20px"/>
-                            </span>
-                        </div>
-                        <div ng-show="store.isSelect(2)" ng-repeat="reviews in product.reviews">
-                            <div>
-                                Note : {{reviews.stars}} / 5 <br/>
-                                Message : {{reviews.body}} <br/>
-                                Auteur : {{reviews.author}} <br/>
-                                Date : {{reviews.createdOn | date : "dd/MM/yyyy"}} <br/><br/>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                <table ng-repeat="product in store.products | orderBy: store.activeFilter" class="table table-striped" style="max-width:800px;display:inline-table;">
+                    <thead style="cursor:pointer">
+                        <th style="text-align:center">Image</th>
+                        <th style="text-align:center" href ng_click="store.filterOn('name')">Nom</th>
+                        <th style="text-align:center" href ng_click="store.filterOn('price')">Prix</th>
+                        <th style="text-align:center">Commentaires</th>
+                    </thead>
+                    <tbody ng-show = "product.selected">
+                        <tr>
+                            <td style="vertical-align:middle"> <img src="{{images}}" style="width: 150px; height:150px"/>
+                            <td style="vertical-align:middle">{{product.name}}</td>
+                            <td style="vertical-align:middle">{{product.price | currency: '€' : 2}}</td>
+                            <td style="width:150px;vertical-align:middle"><button class="btn btn-primary btn-block">Ajouter au panier</button></td>
+                            <td style="vertical-align:middle">
+                                <div ng-repeat="reviews in product.reviews">
+                                    <div>
+                                        Note : {{reviews.stars}} / 5 <br/>
+                                        Message : {{reviews.body}} <br/>
+                                        Auteur : {{reviews.author}} <br/>
+                                        Date : {{reviews.createdOn | date : "dd/MM/yyyy"}} <br/><br/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class = 'row' ng:controller="CartForm" ng-show="store.isSelect(2)">
+                <table class="table">
+                    <tr>
+                        <th>Nom</th>
+                        <th>Qté</th>
+                        <th>Prix</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                    <tr ng:repeat="item in invoice.items">
+                        <td><input type="text" ng:model="item.description"class="input-small"></td>
+                        <td><input type="number" ng:model="item.qty" ng:required class="input-mini"></td>
+                        <td><input type="number" ng:model="item.cost" ng:required class="input-mini"></td>
+                        <td>{{item.qty * item.cost | currency}}</td>
+                        <td>
+                            [<a href ng:click="removeItem($index)">X</a>]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href ng:click="addItem()" class="btn btn-small">add item</a></td>
+                        <td></td>
+                        <td>Total:</td>
+                        <td>{{total() | currency}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <script>
+            $('.carosel-control-right').click(function() {
+              $(this).blur();
+              $(this).parent().find('.carosel-item').first().insertAfter($(this).parent().find('.carosel-item').last());
+            });
+            $('.carosel-control-left').click(function() {
+              $(this).blur();
+              $(this).parent().find('.carosel-item').last().insertBefore($(this).parent().find('.carosel-item').first());
+            });
+        </script>
     </body>
 </html>
