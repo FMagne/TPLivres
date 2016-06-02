@@ -28,7 +28,7 @@
 }
 .carosel {
   position: relative;
-  background-color: #000;
+  background-color: #FFF;
 }
 .carosel-inner {
   white-space: nowrap;
@@ -50,10 +50,10 @@
   display: inline-block;
 }
 .carosel-control-left {
-  left: 15px;
+  left: -60px;
 }
 .carosel-control-right {
-  right: 15px;
+  right: -60px;
 }
 .carosel-control:active,
 .carosel-control:hover {
@@ -83,7 +83,7 @@
                         <a class="carosel-control carosel-control-left glyphicon glyphicon-chevron-left" href="#"></a>
                         <div class="carosel-inner">
                             <span ng-repeat="product in store.products | orderBy : 'store.activeFilter'" style="cursor:pointer">
-                                <img style="width:100px" class="carosel-item" src="{{product.image}}" />
+                                <img style="width:100px;margin-left:20px" class="carosel-item" src="{{product.image}}" />
                             </span>
                         </div>
                         <a class="carosel-control carosel-control-right glyphicon glyphicon-chevron-right" href="#"></a>
