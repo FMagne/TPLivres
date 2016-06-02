@@ -32,7 +32,7 @@
               body: "This gem sucks.",
               author: "tim@example.org",
               createdOn: 1397490980837
-            }]
+            }],
         },
         {
             name: 'Tome 2 : La Pierre des Larmes',
