@@ -48,6 +48,32 @@
                 </div>
             </div>
             <div class ='row'>
+                <table class="table table-striped" style="max-width:800px;display:inline-table;">
+                    <thead style="cursor:pointer">
+                        <th style="text-align:center"><span ng-show="store.isSelect(1)">Image</span></th>
+                        <th style="text-align:center" href ng_click="store.filterOn('name')">Nom</th>
+                        <th style="text-align:center" href ng_click="store.filterOn('price')">Prix</th>
+                        <th style="text-align:center"><div ng-show="store.isSelect(2)">Commentaires</div></th>
+                    </thead>
+                    <tbody>
+                        <tr ng-show = "product.selected">
+                            <td style="vertical-align:middle"> <img src="{{images}}" style="width: 100px; height:100px"/>
+                            <td style="vertical-align:middle">{{product.name}}</td>
+                            <td style="vertical-align:middle">{{product.price | currency: '€' : 2}}</td>
+                            <td style="width:150px;vertical-align:middle"><button class="btn btn-primary btn-block">Ajouter au panier</button></td>
+                            <td style="vertical-align:middle">
+                                <div ng-repeat="reviews in product.reviews">
+                                    <div>
+                                        Note : {{reviews.stars}} / 5 <br/>
+                                        Message : {{reviews.body}} <br/>
+                                        Auteur : {{reviews.author}} <br/>
+                                        Date : {{reviews.createdOn | date : "dd/MM/yyyy"}} <br/><br/>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
