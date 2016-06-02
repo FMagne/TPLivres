@@ -140,7 +140,7 @@
         {
             name: "Tome 8 : L'Empire des Vaincus",
             price: 8,
-            image: "images/8_nakedempire",
+            image: "images/8_nakedempire.jpg",
             reviews: [{
               stars: 5,
               body: "I love this gem!",
