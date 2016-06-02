@@ -27,31 +27,19 @@
             for(var i = 0; i<this.products.length ; i++)
                 this.products[i].selected = (i==livre);
         }
-    });
+        this.invoice = [];
 
-    app.controller('CartForm', function(){
-        this.invoice = {
-            items: [{
-                qty: 10,
-                description: 'item',
-                cost: 9.95}]
+        this.addItem = function(id) {
+            this.invoice.push(id);
         }
 
-        this.addItem = function() {
-            this.invoice.items.push({
-                qty: 1,
-                description: '',
-                cost: 0
-            });
-        }
-
-        this.removeItem = function(index) {
-            this.invoice.items.splice(index, 1);
+        this.removeItem = function(id) {
+            this.invoice.splice(id);
         }
 
         this.total = function() {
             var total = 0;
-            angular.forEach(this.invoice.items, function(item) {
+            angular.forEach(this.invoice, function(item) {
                 total += item.qty * item.cost;
             })
 
