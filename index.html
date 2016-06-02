@@ -28,7 +28,7 @@
 }
 .carosel {
   position: relative;
-  background-color: #000;
+  background-color: #FFF;
 }
 .carosel-inner {
   white-space: nowrap;
@@ -50,10 +50,10 @@
   display: inline-block;
 }
 .carosel-control-left {
-  left: 15px;
+  left: -60px;
 }
 .carosel-control-right {
-  right: 15px;
+  right: -60px;
 }
 .carosel-control:active,
 .carosel-control:hover {
@@ -77,7 +77,7 @@
                         <a class="carosel-control carosel-control-left glyphicon glyphicon-chevron-left" href="#"></a>
                         <div class="carosel-inner">
                             <span ng-repeat="product in store.products | orderBy : 'store.activeFilter'" style="cursor:pointer">
-                                <img style="width:100px" class="carosel-item" src="{{product.image}}" />
+                                <img style="width:100px;margin-left:20px;" class="carosel-item" src="{{product.image}}" />
                             </span>
                         </div>
                         <a class="carosel-control carosel-control-right glyphicon glyphicon-chevron-right" href="#"></a>
@@ -86,15 +86,15 @@
                 </div>
             </div>
             <div class ='row'>
-                <table ng-repeat="product in store.products | orderBy: store.activeFilter" class="table table-striped" style="max-width:800px;display:inline-table;">
+                <table class="table table-striped" style="max-width:800px;display:inline-table;">
                     <thead style="cursor:pointer">
                         <th style="text-align:center">Image</th>
                         <th style="text-align:center" href ng_click="store.filterOn('name')">Nom</th>
                         <th style="text-align:center" href ng_click="store.filterOn('price')">Prix</th>
                         <th style="text-align:center">Commentaires</th>
                     </thead>
-                    <tbody ng-show = "product.selected">
-                        <tr>
+                    <tbody>
+                        <tr ng-show = "product.selected">
                             <td style="vertical-align:middle"> <img src="{{images}}" style="width: 150px; height:150px"/>
                             <td style="vertical-align:middle">{{product.name}}</td>
                             <td style="vertical-align:middle">{{product.price | currency: '€' : 2}}</td>
@@ -111,32 +111,6 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
-            </div>
-            <div class = 'row' ng:controller="CartForm">
-                <table class="table">
-                    <tr>
-                        <th>Nom</th>
-                        <th>Qté</th>
-                        <th>Prix</th>
-                        <th>Total</th>
-                        <th></th>
-                    </tr>
-                    <tr ng:repeat="item in invoice.items">
-                        <td><input type="text" ng:model="item.description"class="input-small"></td>
-                        <td><input type="number" ng:model="item.qty" ng:required class="input-mini"></td>
-                        <td><input type="number" ng:model="item.cost" ng:required class="input-mini"></td>
-                        <td>{{item.qty * item.cost | currency}}</td>
-                        <td>
-                            [<a href ng:click="removeItem($index)">X</a>]
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href ng:click="addItem()" class="btn btn-small">add item</a></td>
-                        <td></td>
-                        <td>Total:</td>
-                        <td>{{total() | currency}}</td>
-                    </tr>
                 </table>
             </div>
         </div>
