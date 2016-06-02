@@ -82,7 +82,7 @@
                     <div class="carosel col-xs-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-10 col-md-6 col-lg-6" id="carosel1">
                         <a class="carosel-control carosel-control-left glyphicon glyphicon-chevron-left" href="#"></a>
                         <div class="carosel-inner">
-                            <span ng-repeat="product in store.products | orderBy : 'store.activeFilter'" style="cursor:pointer">
+                            <span ng-repeat="product in store.products | orderBy : 'store.activeFilter' track by $index" ng-click="store.selectedItem(productIndex)"style="cursor:pointer" ng-init="productIndex = $index">
                                 <img style="width:100px;margin-left:20px" class="carosel-item" src="{{product.image}}" />
                             </span>
                         </div>
@@ -95,9 +95,9 @@
                             <th style="text-align:center" href ng_click="store.filterOn('price')">Prix</th>
                             <th style="text-align:center">Commentaires</th>
                         </thead>
-                        <tbody ng-show = "product.selected">
-                            <tr ng-repeat="product in store.products | orderBy: store.activeFilter">
-                                <td style="vertical-align:middle"> <img src="{{images}}" style="width: 150px; height:150px"/>
+                        <tbody>
+                            <tr ng-repeat="product in store.products | orderBy: store.activeFilter" ng-show = "product.selected">
+                                <td style="vertical-align:middle"> <img src="{{product.image}}" style="width: 150px; height:150px"/>
                                 <td style="vertical-align:middle">{{product.name}}</td>
                                 <td style="vertical-align:middle">{{product.price | currency: '€' : 2}}</td>
                                 <td style="width:150px;vertical-align:middle"><button class="btn btn-primary btn-block">Ajouter au panier</button></td>

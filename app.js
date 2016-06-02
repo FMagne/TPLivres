@@ -22,6 +22,11 @@
             }else
                 this.reverse = true;
         }
+
+        this.selectedItem = function(livre){
+            for(var i = 0; i<this.products.length ; i++)
+                this.products[i].selected = (i==livre);
+        }
     });
 
     app.controller('CartForm', function(){
