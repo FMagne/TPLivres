@@ -24,6 +24,35 @@
         }
     });
 
+    app.controller('CartForm', function(){
+        this.invoice = {
+            items: [{
+                qty: 10,
+                description: 'item',
+                cost: 9.95}]
+        }
+
+        this.addItem = function() {
+            this.invoice.items.push({
+                qty: 1,
+                description: '',
+                cost: 0
+            });
+        }
+
+        this.removeItem = function(index) {
+            this.invoice.items.splice(index, 1);
+        }
+
+        this.total = function() {
+            var total = 0;
+            angular.forEach(this.invoice.items, function(item) {
+                total += item.qty * item.cost;
+            })
+
+            return total;
+        }
+    });
     var books = [
         {
             name: 'Tome 1 : La Première Leçon du Sorcier',
@@ -281,35 +310,4 @@
             selected: false
         }
     ];
-
-    function CartForm() {
-        this.invoice = {
-            items: [{
-                qty: 10,
-                description: 'item',
-                cost: 9.95}]
-        };
-
-        this.addItem = function() {
-            this.invoice.items.push({
-                qty: 1,
-                description: '',
-                cost: 0
-            });
-        },
-
-        this.removeItem = function(index) {
-            this.invoice.items.splice(index, 1);
-        },
-
-        this.total = function() {
-            var total = 0;
-            angular.forEach(this.invoice.items, function(item) {
-                total += item.qty * item.cost;
-            })
-
-            return total;
-        }
-    }
-
 })();
