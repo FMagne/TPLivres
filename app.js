@@ -27,21 +27,39 @@
             for(var i = 0; i<this.products.length ; i++)
                 this.products[i].selected = (i==livre);
         }
-        this.invoice = [];
+
+        this.item = new Array();
+        this.quantite = new Array();
 
         this.addItem = function(id) {
-            this.invoice.push(id);
+            var find = false;
+            for(var i = 0; i< this.item.length; i++){
+                if(this.item[i]==id){
+                    this.quantite[i] += 1;
+                    find = true;
+                }
+            }
+            if(!find){
+                this.item.push(id);
+                this.quantite.push(1);
+            }
         }
-
         this.removeItem = function(id) {
-            this.invoice.splice(id);
+           for(var i = 0; i< this.item.length; i++){
+                if(this.item[i]==id){
+                    this.quantite[i] -= 1;
+                    if(this.quantite[i] <= 0){
+                        this.item.splice(i,1);
+                        this.quantite.splice(i,1);
+                    }
+                }
+            }
         }
 
         this.total = function() {
             var total = 0;
-            angular.forEach(this.invoice, function(item) {
-                total += item.qty * item.cost;
-            })
+            for(var i = 0;i<this.item.length; i++)
+                total+= this.products[this.item[i]].price * this.quantite[i];
 
             return total;
         }

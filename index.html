@@ -94,11 +94,11 @@
                             <th style="text-align:center">Commentaires</th>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="product in store.products | orderBy: store.activeFilter track by $index" ng-show = "product.selected" ng-init="productIndex2 = $index">
+                            <tr ng-repeat="product in store.products | orderBy: 'store.activeFilter' track by $index" ng-show = "product.selected" ng-init="productIndex = $index">
                                 <td style="vertical-align:middle"> <img src="{{product.image}}" style="width: 150px; height:150px"/>
                                 <td style="vertical-align:middle">{{product.name}}</td>
                                 <td style="vertical-align:middle">{{product.price | currency: '€' : 2}}</td>
-                                <td style="width:150px;vertical-align:middle"><button class="btn btn-primary btn-block" ng-click="store.addItem(productIndex2)">Ajouter au panier</button></td>
+                                <td style="width:150px;vertical-align:middle"><button class="btn btn-primary btn-block" ng-click="store.addItem(productIndex)">Ajouter au panier</button></td>
                                 <td style="vertical-align:middle">
                                     <div ng-repeat="reviews in product.reviews">
                                         <div>
@@ -122,11 +122,11 @@
                             <th>Total</th>
                             <th></th>
                         </tr>
-                        <tr ng-repeat="item in store.invoice">
+                        <tr ng-repeat="item in store.item track by $index" ng-init="itemIndex = $index">
                             <td>{{store.products[item].name}}</td>
-                            <td></td>
+                            <td>{{store.quantite[itemIndex]}}</td>
                             <td>{{store.products[item].price}}</td>
-                            <td>{{store.products[item].price | currency}}</td>
+                            <td>{{store.products[item].price * store.quantite[itemIndex] | currency}}</td>
                             <td>
                                 [<a href ng:click="store.removeItem($index)">X</a>]
                             </td>
