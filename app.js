@@ -55,23 +55,57 @@
                 }
             }
         }
-
-        this.total = function() {
+        this.total = function(){
+            return this.totalSansReduc() - this.reduc();
+        }
+        this.totalSansReduc = function() {
             var total = 0;
             for(var i = 0;i<this.item.length; i++)
                 total+= this.products[this.item[i]].price * this.quantite[i];
-            //Reduction
-            this.reduc(total);
             return total;
         }
 
-        this.reduc = function(total){
+        this.reduc = function(){
             var compteur = 0;
-            var itemsReduc = this.quantite;
-            var reduc = total;
+            var itemsReduc = JSON.parse(JSON.stringify(this.quantite));
+            var reduc = parseFloat(0);
+            var newTotal = parseFloat(0);
+            var price=0;
             if(itemsReduc.length>=2){
-
-                return reduc;
+                do{
+                    compteur = 0;
+                    price = 0;
+                    for(var i=0; i< itemsReduc.length ; i++){
+                        if(itemsReduc[i]!=0){
+                            itemsReduc[i] -= 1;
+                            compteur++;
+                            price += this.products[this.item[i]].price;
+                        }
+                    }
+                    newTotal = price;
+                    switch(compteur){
+                        case 2:
+                            //5%
+                            newTotal *= 0.95;
+                            break;
+                        case 3:
+                            //10%
+                            newTotal *= 0.90;
+                            break;
+                        case 4:
+                            //20%
+                            newTotal *= 0.80;
+                            break;
+                        case 5:
+                            //25%
+                            newTotal *= 0.75;
+                            break;
+                        default:
+                            break;
+                    }
+                    reduc += parseFloat(price) - parseFloat(newTotal);
+                }while(compteur!=0);
+                return parseFloat(reduc);
             }else
                 return 0;
 

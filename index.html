@@ -140,12 +140,12 @@
                             <tr ng-show=" store.item.length>=2">
                                 <td colspan="2"></td>
                                 <td>Reduction:</td>
-                                <td>{{store.reduc(store.total()) | currency}}</td>
+                                <td>{{store.reduc() | currency : '$' :2}}</td>
                             </tr>
                             <tr ng-show="store.item.length >=1">
                                 <td colspan="2"></td>
                                 <td>Total:</td>
-                                <td>{{store.total() | currency}}</td>
+                                <td>{{store.total() | currency : '$' :2}}</td>
                             </tr>
                         </table>
                     </div>
