@@ -60,10 +60,25 @@
             var total = 0;
             for(var i = 0;i<this.item.length; i++)
                 total+= this.products[this.item[i]].price * this.quantite[i];
-
+            //Reduction
+            this.reduc(total);
             return total;
         }
+
+        this.reduc = function(total){
+            var compteur = 0;
+            var itemsReduc = this.quantite;
+            var reduc = total;
+            if(itemsReduc.length>=2){
+
+                return reduc;
+            }else
+                return 0;
+
+        }
     });
+
+
     var books = [
         {
             name: 'Tome 1 : La Première Leçon du Sorcier',

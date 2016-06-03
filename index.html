@@ -74,69 +74,81 @@
                     <section ng-init="store.selTab(1)">
                         <ul class="nav nav-pills">
                             <li ng-class="{'active' : store.isSelect(1)}"> <a href ng_click="store.selTab(1)">Bibliothèque</a></li>
-                            <li ng-class="{'active' : store.isSelect(2)}"> <a href ng_click="store.selTab(2)">Mon Panier</a></li>
+                            <li ng-class="{'active' : store.isSelect(2)}"> <a href ng_click="store.selTab(2)" ng-show="store.item.length==1">Mon Panier ({{store.item.length}} tome)</a>
+                            <a href ng_click="store.selTab(2)" ng-show="store.item.length>1">Mon Panier ({{store.item.length}} tomes différents)</a>
+                            <a href ng_click="store.selTab(2)" ng-show="store.item.length<1">Panier Vide</a>
+                            </li>
                         </ul>
                     </section>
                 </div>
                 <div class ='row' ng-show="store.isSelect(1)">
                     <div class="carosel col-xs-offset-1 col-md-offset-2 col-lg-offset-3 col-xs-10 col-md-6 col-lg-6" id="carosel1">
-                        <a class="carosel-control carosel-control-left glyphicon glyphicon-chevron-left" href="#"></a>
+                        <a class="carosel-control carosel-control-left " href="#"><</a>
                         <div class="carosel-inner">
                                 <img style="width:100px;margin-left:20px;cursor:pointer" class="carosel-item" src="{{product.image}}" ng-repeat="product in store.products | orderBy : 'store.activeFilter' track by $index" ng-click="store.selectedItem(productIndex)" ng-init="productIndex = $index"/>
                         </div>
-                        <a class="carosel-control carosel-control-right glyphicon glyphicon-chevron-right" href="#"></a>
+                        <a class="carosel-control carosel-control-right " href="#">></a>
                     </div>
-                    <table class="table table-striped" style="max-width:800px;display:inline-table;">
-                        <thead style="cursor:pointer">
-                            <th style="text-align:center">Image</th>
-                            <th style="text-align:center" href ng_click="store.filterOn('name')">Nom</th>
-                            <th style="text-align:center" href ng_click="store.filterOn('price')">Prix</th>
-                            <th style="text-align:center">Commentaires</th>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="product in store.products | orderBy: 'store.activeFilter' track by $index" ng-show = "product.selected" ng-init="productIndex = $index">
-                                <td style="vertical-align:middle"> <img src="{{product.image}}" style="width: 150px; height:150px"/>
-                                <td style="vertical-align:middle">{{product.name}}</td>
-                                <td style="vertical-align:middle">{{product.price | currency: '€' : 2}}</td>
-                                <td style="width:150px;vertical-align:middle"><button class="btn btn-primary btn-block" ng-click="store.addItem(productIndex)">Ajouter au panier</button></td>
-                                <td style="vertical-align:middle">
-                                    <div ng-repeat="reviews in product.reviews">
-                                        <div>
-                                            Note : {{reviews.stars}} / 5 <br/>
-                                            Message : {{reviews.body}} <br/>
-                                            Auteur : {{reviews.author}} <br/>
-                                            Date : {{reviews.createdOn | date : "dd/MM/yyyy"}} <br/><br/>
+                    <div class="col-xs-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-md-8 col-lg-8">
+                        <table class="table table-striped" style="max-width:800px;display:inline-table;">
+                            <thead style="cursor:pointer">
+                                <th style="text-align:center">Image</th>
+                                <th style="text-align:center" href ng_click="store.filterOn('name')">Nom</th>
+                                <th style="text-align:center" href ng_click="store.filterOn('price')">Prix</th>
+                                <th style="text-align:center">Commentaires</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="product in store.products | orderBy: 'store.activeFilter' track by $index" ng-show = "product.selected" ng-init="productIndex = $index">
+                                    <td style="vertical-align:middle"> <img src="{{product.image}}" style="width: 100px; height:150px"/>
+                                    <td style="vertical-align:middle">{{product.name}}</td>
+                                    <td style="vertical-align:middle">{{product.price | currency: '€' : 2}}</td>
+                                    <td style="width:150px;vertical-align:middle"><button class="btn btn-primary btn-block" ng-click="store.addItem(productIndex)">Ajouter au panier</button></td>
+                                    <td style="vertical-align:middle">
+                                        <div ng-repeat="reviews in product.reviews">
+                                            <div>
+                                                Note : {{reviews.stars}} / 5 <br/>
+                                                Message : {{reviews.body}} <br/>
+                                                Auteur : {{reviews.author}} <br/>
+                                                Date : {{reviews.createdOn | date : "dd/MM/yyyy"}} <br/><br/>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class = 'row' ng-show="store.isSelect(2)" >
+                    <div class="col-xs-offset-2 col-md-offset-2 col-lg-offset-2 col-xs-8 col-md-8 col-lg-8">
+                        <table class="table" ng-show="store.item.length >=1">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Qté</th>
+                                <th>Prix</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                            <tr ng-repeat="item in store.item track by $index" ng-init="itemIndex = $index" >
+                                <td>{{store.products[item].name}}</td>
+                                <td>{{store.quantite[itemIndex]}}</td>
+                                <td>{{store.products[item].price}}</td>
+                                <td>{{store.products[item].price * store.quantite[itemIndex] | currency}}</td>
+                                <td>
+                                    [<a href ng:click="store.removeItem(item)">X</a>]
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class = 'row' ng-show="store.isSelect(2)">
-                    <table class="table">
-                        <tr>
-                            <th>Nom</th>
-                            <th>Qté</th>
-                            <th>Prix</th>
-                            <th>Total</th>
-                            <th></th>
-                        </tr>
-                        <tr ng-repeat="item in store.item track by $index" ng-init="itemIndex = $index">
-                            <td>{{store.products[item].name}}</td>
-                            <td>{{store.quantite[itemIndex]}}</td>
-                            <td>{{store.products[item].price}}</td>
-                            <td>{{store.products[item].price * store.quantite[itemIndex] | currency}}</td>
-                            <td>
-                                [<a href ng:click="store.removeItem($index)">X</a>]
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td>Total:</td>
-                            <td>{{store.total() | currency}}</td>
-                        </tr>
-                    </table>
+                            <tr ng-show=" store.item.length>=2">
+                                <td colspan="2"></td>
+                                <td>Reduction:</td>
+                                <td>{{store.reduc(store.total()) | currency}}</td>
+                            </tr>
+                            <tr ng-show="store.item.length >=1">
+                                <td colspan="2"></td>
+                                <td>Total:</td>
+                                <td>{{store.total() | currency}}</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
